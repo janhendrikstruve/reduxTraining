@@ -8,6 +8,7 @@ export default function reduxTest() {
   store.dispatch(projectAdded({ name: 'project1' }));
   store.dispatch(projectAdded({ name: 'project2' }));
   store.dispatch(projectAdded({ name: 'project3' }));
+
   store.dispatch(bugAdded({ description: 'Bug1' }));
   store.dispatch(bugAdded({ description: 'Bug2' }));
   store.dispatch(bugAdded({ description: 'Bug3' }));
