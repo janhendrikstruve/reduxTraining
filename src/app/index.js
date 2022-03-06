@@ -8,7 +8,7 @@ import {
 } from './store/bugs';
 import { userAdded } from './store/users';
 
-export default function reduxTest() {
+export default function index() {
   const store = configureStore();
 
   store.dispatch(userAdded({ name: 'Olaf' }));

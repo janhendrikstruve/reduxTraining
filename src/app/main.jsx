@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './globals.css';
 import App from './App';
-import reduxTest from './reduxTest'
+import index from './index'
 
-reduxTest()
+index()
 ReactDOM.render(
   <React.StrictMode>
     <App />
