@@ -12,6 +12,16 @@ const slice = createSlice({
     lastFetch: null,
   },
   reducers: {
+    bugsRequested: (bugs, action) => {
+      bugs.loading = true;
+    },
+    bugsReceived: (bugs, action) => {
+      bugs.list = action.payload;
+      bugs.loading = false;
+    },
+    bugsRequestFailed: (bugs, action) => {
+      bugs.loading = false;
+    },
     bugAdded: (bugs, action) => {
       bugs.list.push({
         id: ++lastId,
@@ -34,14 +44,17 @@ const slice = createSlice({
           : bug
       );
     },
-    bugsReceived: (bugs, action) => {
-      bugs.list = action.payload;
-    },
   },
 });
 
-export const { bugAdded, bugResolved, bugAssignedToUser, bugsReceived } =
-  slice.actions;
+export const {
+  bugAdded,
+  bugResolved,
+  bugAssignedToUser,
+  bugsReceived,
+  bugsRequested,
+  bugsRequestFailed,
+} = slice.actions;
 export default slice.reducer;
 
 export const getUnresolvedBugs = createSelector(
@@ -60,5 +73,7 @@ const url = '/bugs';
 export const loadBugs = () =>
   apiCallBegan({
     url,
+    onStart: bugsRequested.type,
     onSuccess: bugsReceived.type,
+    onError: bugsRequestFailed.type,
   });
